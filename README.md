@@ -32,10 +32,6 @@ For more details see [GitHub Flavored Markdown](https://guides.github.com/featur
 
 Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rodriggs/Features-Rows/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
-
 
 ## Feature Selection
 Feature selection is going to be an essential part of the exercise given that the training data set has 250 rows and 300 features. In order to get the features down to a more appropriate size, a combination of principal component analysis, random forests to calculate feature importances, and logistic regression model coefficients were employed for feature selection. For the principal component analysis, the features were all standardized and for the other two models either standardized or un-standardized features were used.
