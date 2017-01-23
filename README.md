@@ -1,37 +1,4 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/rodriggs/Features-Rows/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rodriggs/Features-Rows/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
+In business and other disciplines, analysis often requires making inferences based on limited amounts of data where there are more variables than observations (e.g. [genetic research: a person with many genes](https://deepblue.lib.umich.edu/bitstream/handle/2027.42/46947/10994_2005_Article_422926.pdf?sequence=1&isAllowed=y), [image processing: one picture, many pixels](https://en.wikipedia.org/wiki/Image_processing), [text analysis](https://en.wikipedia.org/wiki/Information_retrieval), [recommender systems: amazon buyers, netflix viewers](http://s3.amazonaws.com/academia.edu.documents/32978074/Recommender_systems_handbook.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1485158590&Signature=6C7gZaKoaEjmh2Ag0fJRQcv2X5o%3D&response-content-disposition=inline%3B%20filename%3DEditors.pdf)). 
 
 ## Feature Selection
 Feature selection is going to be an essential part of the exercise given that the training data set has 250 rows and 300 features. In order to get the features down to a more appropriate size, a combination of principal component analysis, random forests to calculate feature importances, and logistic regression model coefficients were employed for feature selection. For the principal component analysis, the features were all standardized and for the other two models either standardized or un-standardized features were used.
