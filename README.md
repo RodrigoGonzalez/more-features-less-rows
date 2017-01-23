@@ -35,7 +35,22 @@ Classifier | Tuning Parameters
 Given the number of models used and the number of hyper-parameters explored, a very specific process was developed in order to efficiently select the best models. A pipeline algorithm that incorporated all of the transformations was used for efficiency with a parameter grid that could easily be updated depending on the parameters and hyper parameters (whether or not to use PCA for example) the models employ using a grid search. 
 
 ### Nested Cross-Validation
-The algorithm for fitting the models incorporated nested cross-validation with stratified KFolds to ensure balanced folds with the parameters nested cross-validation . The nested cross-validation was used to avoid biased performance estimates and hold out sets of the inner and outer CV’s were 20% of the training data with 5 KFolds. If the resulting parameters determined by the nested cross validation converged and were stable, then the model minimizes both [variance](https://en.wikipedia.org/wiki/Variance) and [bias](https://en.wikipedia.org/wiki/Bias_of_an_estimator), which is extremely useful given the normal [bias–variance tradeoff](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff), which is normally encountered in statistical and machine learning. 
+The algorithm for fitting the models incorporated nested cross-validation with stratified KFolds to ensure balanced folds with the parameters nested cross-validation . The nested cross-validation was used to avoid biased performance estimates and hold out sets of the inner and outer CV’s were 20% of the training data with 5 KFolds. If the resulting parameters determined by the nested cross validation converged and were stable, then the model minimizes both [variance](https://en.wikipedia.org/wiki/Variance) and [bias](https://en.wikipedia.org/wiki/Bias_of_an_estimator), which is extremely useful given the normal [bias–variance tradeoff](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff), which is normally encountered in statistical and machine learning. The following snippet, provides the python script used for the nested cross validation.
+
+```python
+for training_set_indices_i, testing_set_indices_i in cv_outer:
+
+    training_set_i = X[training_set_indices_i], y[training_set_indices_i]
+    testing_set_i = X[testing_set_indices_i], y[testing_set_indices_i]
+
+    grid_search.fit(*training_set_i)
+
+    print grid_search.best_params_, '\t\t', grid_search.score(*testing_set_i)
+
+    params = np.array(grid_search.best_params_.items())
+
+    score = ['score', grid_search.score(*testing_set_i)]
+```
 
 ### Scoring Methods
 Scoring methods explored for the both the inner and outer CV’s used were accuracy, ROC AUC, f1, and log-loss. I also explored using mean absolute error out of curiosity on the inner CV and evaluating the outer CV scores using ROC AUC and Accuracy on the hold out training set and the results were pretty awful as expected. These were saved as different scripts in order to parallelize the process over multiple cores, however, this process took a few days to complete.
@@ -46,10 +61,10 @@ The best models were selected using both the accuracy and ROC AUC of the hold ou
 Ultimately, I decided to just take the averages of the predicted probabilities of the best models, rather than stack an additional model, since this method gave excellent results on the holdout set, and I did not want to overfit on the training data set.
 
 ## Solution
-The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. 
-The six best models with their parameters identified were:
+The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches.
 
 
+### The Best Models
 Regressor | Tuning Parameters
 ------------ | -------------
 -	Bagging Classifier | Approximately 500 trees, and max features & max samples of around 0.85
@@ -59,12 +74,12 @@ Regressor | Tuning Parameters
 -	Random Forest | Out-of-bag samples were used to estimate the generalization error, around 500 trees with a max depth of 6.
 -	C-Support Vector Classification | Gammas in the thousands range, coefficients of 9.0, with third degree polynomial kernels and shrinking.
 
-The Logistic Regression was the only method that was optimized with 95 principal components, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported.
+The Logistic Regression was the only method that was optimized with 83 principal components, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported.
 
 ## Conclusion
-The objective of this challenge was to build a model based on a training set of 250 rows with 300 features, in order to predict probabilities for 19,750 rows. Feature selection was very important in order to train a robust model, and a logistic regression identified features of interest. If what the feature were would have been provided, this would have been an excellent way to identify data that is important to collect for predicting a target value. 
+The objective of this challenge was to build a model based on a training set of 250 rows with 300 features, in order to predict probabilities for 19,750 rows. Feature selection was very important in order to train a robust model, and a logistic regression identified features of interest. If a description of the feature were would have been provided, this would have been an excellent way to identify data that is important to collect for predicting a target value.
 
 Although principal component analysis was used on the features that were identified, this feature extraction technique did not add much information to the final models. 
 
-The final models’ predicted probabilities were then averaged, to get a final a predicted probability and averaging works quite well for a wide range of problems.  
+The final models’ predicted probabilities were then averaged, to get a final predicted probabilities that resulted in an AUC of 0.97. Averaging works quite well for a wide range of problems.
 
