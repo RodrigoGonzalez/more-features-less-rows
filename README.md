@@ -32,12 +32,16 @@ Classifier | Tuning Parameters
 [K Nearest Neighbors](https://en.wikipedia.org/wiki/K-means_clustering) | Number of neighbors, distance metrics (with corresponding hyper parameters), and although used with all aforementioned models, PCA was of particular importance and was used to lower the number of features used to calculate the distance metrics (interestingly only about 5-10 were optimal choices).
 
 ## Model Selection
-Given the number of models used and the number of hyper-parameters explored, a very specific process was developed in order to efficiently select the best models. A pipeline algorithm that incorporated all of the transformations was used for efficiency with a parameter grid that could easily be updated depending on the parameters and hyper parameters (whether or not to use PCA for example) the models employ using a grid search. In the relevant models (i.e. contain decisions trees) both the [gini impurity and entropy](https://en.m.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity) were explored when fitting the models (although ultimately gini gave the best performing models.
+Given the number of models used and the number of hyper-parameters explored, a very specific process was developed in order to efficiently select the best models. A pipeline algorithm that incorporated all of the transformations was used for efficiency with a parameter grid that could easily be updated depending on the parameters and hyper parameters (whether or not to use PCA for example) the models employ using a grid search. In the relevant models (i.e. contain decisions trees) both the [gini impurity and entropy](https://en.m.wikipedia.org/wiki/Decision_tree_learning#Gini_impurity) were explored when fitting the models (although ultimately gini gave the best performing models).
 
 ### Nested Cross-Validation
 The algorithm for fitting the models incorporated nested cross-validation with stratified KFolds to ensure balanced folds with the parameters nested cross-validation . The nested cross-validation was used to avoid biased performance estimates and hold out sets of the inner and outer CV’s were 20% of the training data with 5 KFolds. If the resulting parameters determined by the nested cross validation converged and were stable, then the model minimizes both [variance](https://en.wikipedia.org/wiki/Variance) and [bias](https://en.wikipedia.org/wiki/Bias_of_an_estimator), which is extremely useful given the normal [bias–variance tradeoff](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff), which is normally encountered in statistical and machine learning. The following snippet, provides the python script used for the nested cross validation. [Cawley and Talbot, 2010](http://jmlr.csail.mit.edu/papers/volume11/cawley10a/cawley10a.pdf) provide an excellent explanation on how nested cross-validation is used to avoid over-fitting in model selection and subsequent selection bias in performance evaluation.
 
 ```python
+best = []
+
+cv_outer = StratifiedShuffleSplit(y, n_iter=5, test_size=0.2, random_state=RANDOM_STATE)
+
 for training_set_indices_i, testing_set_indices_i in cv_outer:
 
     training_set_i = X[training_set_indices_i], y[training_set_indices_i]
