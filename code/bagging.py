@@ -70,12 +70,18 @@ best = []
 cv_outer = StratifiedShuffleSplit(y, n_iter=5, test_size=0.2, random_state=RANDOM_STATE)
 
 for training_set_indices_i, testing_set_indices_i in cv_outer:
+
     training_set_i = X[training_set_indices_i], y[training_set_indices_i]
     testing_set_i = X[testing_set_indices_i], y[testing_set_indices_i]
+
     grid_search.fit(*training_set_i)
+
     print grid_search.best_params_, '\t\t', grid_search.score(*testing_set_i)
+
     params = np.array(grid_search.best_params_.items())
+
     score = ['score', grid_search.score(*testing_set_i)]
+
     best.append(np.vstack((params, score)))
 
 for i, model in enumerate(best):

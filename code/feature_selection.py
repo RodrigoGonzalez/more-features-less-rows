@@ -19,8 +19,8 @@ from sklearn.linear_model import LogisticRegression
 
 class data_transporter(object):
     '''
-    This class makes it easier to move all of the data, including the raw data, 
-    into the various python machine learning algorithms without haveing to load 
+    This class makes it easier to move all of the data, including the raw data,
+    into the various python machine learning algorithms without haveing to load
     them (etc.) all over again.
     '''
     def __init__(self, filename):
@@ -30,9 +30,9 @@ class data_transporter(object):
 
     def load_data(self, filename):
         '''
-        The following data has been anonymized and munged, and contains 300 features 
-        and 250 rows which are used to train the machine learning algorithms in a 
-        classification task. The data is available to download in the data sub folder 
+        The following data has been anonymized and munged, and contains 300 features
+        and 250 rows which are used to train the machine learning algorithms in a
+        classification task. The data is available to download in the data sub folder
         of this project.
         '''
 
@@ -69,8 +69,8 @@ class data_transporter(object):
 
     def update_data(self):
         '''
-        When run, this method will select the columns with the important features 
-        as determined by runnning the logisitic regression, and update the data frames 
+        When run, this method will select the columns with the important features
+        as determined by runnning the logisitic regression, and update the data frames
         to only retain the most important features.
         '''
 
@@ -84,11 +84,10 @@ class data_transporter(object):
     def feature_model(self, model):
         '''
         INPUT: Pipeline
-        No ouput. The loaded logitic regresseion and coefficients resulting from the non-beta 
+        No ouput. The loaded logitic regression and coefficients resulting from the non-beta
         coefficients from the lr model are loaded on the the data transporter.
         '''
 
-        self.model = model
         coeffs = model.coef_.nonzero()[1]
         self.features = self.allfeatures[coeffs]
 
@@ -101,27 +100,27 @@ def grid_search(dt):
     SKLearn comes with excellent libraries that make it easy to fit and process data in one easy step.
     Additionally, the results of each transformation are available in the event that they are needed.
 
-    We will start first with standardizing the data, which transforms the data so that the mean (mu) 
-    is zero and the standard deviation (sigma) is one, since machine learning algorithms tend to 
+    We will start first with standardizing the data, which transforms the data so that the mean (mu)
+    is zero and the standard deviation (sigma) is one, since machine learning algorithms tend to
     really like standardized data. This is especially necessary for algorithms that calculate distance metrics.
 
-    We will be using a logistic regression to determine the features to feed into our models. L1 regularization, 
-    uses a penalty term which encourages the sum of the absolute values of the parameters to be small. 
-    It has frequently been observed that L1 regularization in many models causes many parameters to equal zero, 
-    so that the parameter vector is sparse. Forcing beta coefficients to zero makes it a natural candidate in 
-    feature selection settings, where we believe that many features should be ignored. The best parameters are 
+    We will be using a logistic regression to determine the features to feed into our models. L1 regularization,
+    uses a penalty term which encourages the sum of the absolute values of the parameters to be small.
+    It has frequently been observed that L1 regularization in many models causes many parameters to equal zero,
+    so that the parameter vector is sparse. Forcing beta coefficients to zero makes it a natural candidate in
+    feature selection settings, where we believe that many features should be ignored. The best parameters are
     found using a grid search cross-validation with the mean squared error as the scoring method.
 
-    All of the training data can be used since we are merely selecting the best features to use. As a side note, 
-    the use PCA and Random Forrests was explored as well, but the variances were very close to each other and 
-    no natural cutoff point existed in the PCA (also 250 features were somehow determined to be important), 
+    All of the training data can be used since we are merely selecting the best features to use. As a side note,
+    the use PCA and Random Forrests was explored as well, but the variances were very close to each other and
+    no natural cutoff point existed in the PCA (also 250 features were somehow determined to be important),
     the same issue arose when comparing the random forrest feature importances.
     '''
 
     pipe_lr = Pipeline([('scl', StandardScaler()),
                         ('clf', LogisticRegression(penalty='l1'))])
 
-    Cs = np.logspace(-1, 1, 100) # Can start with a logspace(-4, 4, 1000)
+    Cs = np.logspace(-1, 1, 1000) # Can start with a logspace(-4, 4, 1000)
     # The vast majority of regularization parameters are within this logspace
     # Additionally, fitting this model is very inexpensive computationally
 
@@ -145,10 +144,10 @@ def grid_search(dt):
 
 def find_features(grid_search):
     '''
-    The resulting regularization parameter of the grid search can then be used to fit 
-    a LogisticRegression model. This model calculates the beta coefficients that solve 
-    the data system. As in the aforementioned function, the model forces a number of beta 
-    coefficients to zero, and therefore we use the non-zero beta coefficients to select 
+    The resulting regularization parameter of the grid search can then be used to fit
+    a LogisticRegression model. This model calculates the beta coefficients that solve
+    the data system. As in the aforementioned function, the model forces a number of beta
+    coefficients to zero, and therefore we use the non-zero beta coefficients to select
     features for feeding into the machine learning algorithms
     '''
 
@@ -179,7 +178,7 @@ if __name__ == '__main__':
     dt.feature_model(lr)
 
     # Save
-    # file_Name = 'data_transporter.pkl'
-    # fileObject = open(file_Name,'wb')
-    # pickle.dump(dt,fileObject)
-    # fileObject.close()
+    file_Name = 'data_transporter.pkl'
+    fileObject = open(file_Name,'wb')
+    pickle.dump(dt,fileObject)
+    fileObject.close()
