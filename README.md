@@ -59,7 +59,7 @@ for training_set_indices_i, testing_set_indices_i in cv_outer:
 ### Scoring Methods
 Scoring methods explored for the both the inner and outer CV’s used were accuracy, ROC AUC, f1, and log-loss. I also explored using mean absolute error out of curiosity on the inner CV and evaluating the outer CV scores using ROC AUC and Accuracy on the hold out training set and the results were pretty awful as expected. The various models were saved as different script (e.g. `bagging.py`, `nusvc.py`) in order to parallelize the process over multiple cores, however, this process took a few days to complete.
 
-Scording Method | Description | Equation
+Scoring Method | Description | Equation
 ------------ | -------------  | -------------
 [accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification) | Accuracy is the proportion of true results (both true positives and true negatives) among the total number of cases examined | Accuracy = (True Positive + True Negative) / (Condition Positives + Negatives)
 [f1](https://en.wikipedia.org/wiki/F1_score) | The F1 score can be interpreted as a weighted average of the precision and recall | f<sub>1</sub> = 2 * (precision * recall) / (precision + recall)
