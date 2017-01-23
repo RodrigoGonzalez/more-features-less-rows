@@ -51,7 +51,7 @@ Numerous classification algorithms were explored to fit the training data as par
 
 A selection of models used along with their parameters and hyper-parameters is given below:
 
-**Classifier | Tuning Parameters**
+### Classifier | Tuning Parameters
 ------------ | -------------
 -	Logistic Regression | The penalty, C, and what kind of solver to use were investigated.
 -	Various ensemble methods (random forest, extremely randomized, bagging, adaboost, and gradient boost): | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
@@ -73,7 +73,7 @@ Ultimately, I decided to just take the averages of the predicted probabilities o
 ## Solution
 The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. The six best models with their parameters identified were:
 
-**Regressor | Tuning Parameters**
+### Regressor | Tuning Parameters ###
 ------------ | -------------
 -	Bagging Classifier | Approximately 500 trees, and max features & max samples of around 0.85
 -	Extremely Randomized Trees Classifier | Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a gini coefficient, with bootstrapping.
@@ -85,6 +85,9 @@ The final solution was calculated using the entire training data set to train th
 The Logistic Regression was the only method that was optimized with 95 principal components, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported.
 
 ## Conclusion
-The objective of this challenge was to build a model based on a training set of 250 rows with 300 features, in order to predict probabilities for 19,750 rows. Feature selection was very important in order to train a robust model, and a logistic regression identified features of interest. If what the feature were would have been provided, this would have been an excellent way to identify data that is important to collect for predicting a target value. Although principal component analysis was used on the features that were identified, this feature extraction technique did not add much information to the final models. 
+The objective of this challenge was to build a model based on a training set of 250 rows with 300 features, in order to predict probabilities for 19,750 rows. Feature selection was very important in order to train a robust model, and a logistic regression identified features of interest. If what the feature were would have been provided, this would have been an excellent way to identify data that is important to collect for predicting a target value. 
+
+Although principal component analysis was used on the features that were identified, this feature extraction technique did not add much information to the final models. 
+
 The final models’ predicted probabilities were then averaged, to get a final a predicted probability and averaging works quite well for a wide range of problems.  
 
