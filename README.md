@@ -57,9 +57,9 @@ Scoring methods explored for the both the inner and outer CV’s used were accur
 
 Scording Method | Description | Equation
 ------------ | -------------  | -------------
-accuracy(https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification) | Accuracy is the proportion of true results (both true positives and true negatives) among the total number of cases examined | Accuracy = (True Positive + True Negative) / (Condition Positives + Negatives)
+[accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification) | Accuracy is the proportion of true results (both true positives and true negatives) among the total number of cases examined | Accuracy = (True Positive + True Negative) / (Condition Positives + Negatives)
 [f1](https://en.wikipedia.org/wiki/F1_score) | The F1 score can be interpreted as a weighted average of the precision and recall | f1 = 2 * (precision * recall) / (precision + recall)
-[log-loss]() | The negative log-likelihood of the true labels given a probabilistic classifier’s predictions | ![+](http://www.sciweavers.org/tex2img.php?eq=1%2Bsin%28mc%5E2%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+[log-loss]() | The negative log-likelihood of the true labels given a probabilistic classifier’s predictions | ![log (x)](http://www.sciweavers.org/tex2img.php?eq=1%2Bsin%28mc%5E2%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
 
 [ROC AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) | The ROC is created by plotting the fraction of True Positives vs the fraction of False Positives | TP / (TP+FN) vs TP / (TP+FN)
 
