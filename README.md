@@ -57,7 +57,7 @@ for training_set_indices_i, testing_set_indices_i in cv_outer:
 ```
 
 ### Scoring Methods
-Scoring methods explored for the both the inner and outer CV’s used were accuracy, ROC AUC, f1, and log-loss. I also explored using mean absolute error out of curiosity on the inner CV and evaluating the outer CV scores using ROC AUC and Accuracy on the hold out training set and the results were pretty awful as expected. These were saved as different scripts in order to parallelize the process over multiple cores, however, this process took a few days to complete.
+Scoring methods explored for the both the inner and outer CV’s used were accuracy, ROC AUC, f1, and log-loss. I also explored using mean absolute error out of curiosity on the inner CV and evaluating the outer CV scores using ROC AUC and Accuracy on the hold out training set and the results were pretty awful as expected. The various models were saved as different script (e.g. `bagging.py`, `nusvc.py`) in order to parallelize the process over multiple cores, however, this process took a few days to complete.
 
 Scording Method | Description | Equation
 ------------ | -------------  | -------------
