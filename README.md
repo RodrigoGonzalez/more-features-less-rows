@@ -47,18 +47,19 @@ The input data provided was transformed using the aforementioned feature selecti
 4.	[xgboost](https://github.com/dmlc/xgboost): Gradient boosting library
 
 ## Model Selection
-Numerous classification algorithms were used to fit the training data as part of the model selection process. Given that the labels were generated from the features using an unknown process, many kinds of models were explored. Extreme gradient boosting was considered, however, given the rows in the training set being so small, there was concern that the method would overfit the data. 
+Numerous classification algorithms were explored to fit the training data as part of the model selection process. Given that the labels were generated from the features using an unknown process, many kinds of models were explored. Extreme gradient boosting was considered, however, given the rows in the training set being so small, there was concern that the method would overfit the data. 
 
 A selection of models used along with their parameters and hyper-parameters is given below:
 
-Regressor | Tuning Parameters
+**Classifier | Tuning Parameters**
 ------------ | -------------
--	Logistic Regression: | The penalty, C, and what kind of solver to use were investigated.
+-	Logistic Regression | The penalty, C, and what kind of solver to use were investigated.
 -	Various ensemble methods (random forest, extremely randomized, bagging, adaboost, and gradient boost): | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
--	Passive aggressive algorithms: | with regularization as the hyper-parameter (Explored but not used because cannot calculate predictive probabilities to be calculated).
--	Gaussian Naïve Bayes classifier: | Only number of principal components.
--	Support Vector Machines: | Type of kernel used, gamma, whether to use a shrinking heuristic, nu, and gamma kernel coefficients.
--	K Nearest Neighbors: | Number of neighbors, distance metrics (with corresponding hyper parameters), and although used with all aforementioned models, PCA was of particular importance and was used to lower the number of features used to calculate the distance metrics (interestingly only about 5-10 were optimal choices).
+-	Passive aggressive algorithms | With regularization as the hyper-parameter (Explored but not used because cannot calculate predictive probabilities to be calculated).
+-	Gaussian Naïve Bayes classifier | Only number of principal components.
+-	Support Vector Machines | Type of kernel used, gamma, whether to use a shrinking heuristic, nu, and gamma kernel coefficients.
+-	K Nearest Neighbors | Number of neighbors, distance metrics (with corresponding hyper parameters), and although used with all aforementioned models, PCA was of particular importance and was used to lower the number of features used to calculate the distance metrics (interestingly only about 5-10 were optimal choices).
+
 
 Given the number of models used and the number of hyper-parameters explored, a very specific process was developed in order to efficiently select the best models. A pipeline algorithm that incorporated all of the transformations was used for efficiency with a parameter grid that could easily be updated depending on the parameters and hyper parameters (whether or not to use PCA for example) the models employ using a grid search. 
 
@@ -72,14 +73,15 @@ Ultimately, I decided to just take the averages of the predicted probabilities o
 ## Solution
 The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. The six best models with their parameters identified were:
 
-```markdown
--	Bagging Classifier: Approximately 500 trees, and max features & max samples of around 0.85
--	Extremely Randomized Trees Classifier: Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a gini coefficient, with bootstrapping.
--	Logistic Regression: An L1 penalty was found to be the best, using a liblinear solver, with 95 principal components, and various C parameters depending on the scoring method.
--	Nu-Support Vector Classification: A nu of 0.001 worked very well, with a third polynomial kernel type, gammas in the thousandths, a coefficient term of 1, with shrinking.
--	Random Forest: Out-of-bag samples were used to estimate the generalization error, around 500 trees with a max depth of 6.
--	C-Support Vector Classification: Gammas in the thousands range, coefficients of 9.0, with third degree polynomial kernels and shrinking.
-```
+**Regressor | Tuning Parameters**
+------------ | -------------
+-	Bagging Classifier | Approximately 500 trees, and max features & max samples of around 0.85
+-	Extremely Randomized Trees Classifier | Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a gini coefficient, with bootstrapping.
+-	Logistic Regression | An L1 penalty was found to be the best, using a liblinear solver, with 95 principal components, and various C parameters depending on the scoring method.
+-	Nu-Support Vector Classification | A nu of 0.001 worked very well, with a third polynomial kernel type, gammas in the thousandths, a coefficient term of 1, with shrinking.
+-	Random Forest | Out-of-bag samples were used to estimate the generalization error, around 500 trees with a max depth of 6.
+-	C-Support Vector Classification | Gammas in the thousands range, coefficients of 9.0, with third degree polynomial kernels and shrinking.
+
 The Logistic Regression was the only method that was optimized with 95 principal components, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported.
 
 ## Conclusion
