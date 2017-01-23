@@ -62,11 +62,11 @@ Scoring methods explored for the both the inner and outer CV’s used were accur
 Scording Method | Description | Equation
 ------------ | -------------  | -------------
 [accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification) | Accuracy is the proportion of true results (both true positives and true negatives) among the total number of cases examined | Accuracy = (True Positive + True Negative) / (Condition Positives + Negatives)
-[f1](https://en.wikipedia.org/wiki/F1_score) | The F1 score can be interpreted as a weighted average of the precision and recall | f1 = 2 * (precision * recall) / (precision + recall)
-[log-loss]() | The negative log-likelihood of the true labels given a probabilistic classifier’s predictions | -log P(y<sub>t</sub> given y<sub>p</sub>) = -(y<sub>t</sub> log(y<sub>p</sub>) + (1 - y<sub>t</sub>) log(1 - y<sub>p</sub>)) <sup>1</sup>
+[f1](https://en.wikipedia.org/wiki/F1_score) | The F1 score can be interpreted as a weighted average of the precision and recall | f<sub>1</sub> = 2 * (precision * recall) / (precision + recall)
+[log-loss]() | The negative log-likelihood of the true labels given a probabilistic classifier’s predictions | -log P(y<sub>t</sub> given y<sub>p</sub>) = -(y<sub>t</sub> log(y<sub>p</sub>) + (1 - y<sub>t</sub>) log(1 - y<sub>p</sub>))  <sup>1</sup>
 [ROC AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) | The ROC is created by plotting the fraction of True Positives vs the fraction of False Positives | TP / (TP+FN) vs TP / (TP+FN)
 
-<sub><sup>1. The log loss is only defined for two or more labels. The log loss given is for a single sample with true label yt in {0,1} and estimated probability yp that yt = 1</sup></sub>
+<sub><sup>1. The log loss is only defined for two or more labels. The log loss given is for a single sample with true label yt in {0,1} and estimated probability yp that yt = 1 (definition from sklearn)</sup></sub>
 
 The ultimate strategy is to stack or blend a few different models in order to both decrease the variance and increases the predictive abilities of the final algorithm, which will decrease the likelihood of overfitting.
 
