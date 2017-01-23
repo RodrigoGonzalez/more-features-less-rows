@@ -54,10 +54,10 @@ A selection of models used along with their parameters and hyper-parameters is g
 Classifier | Tuning Parameters
 ------------ | -------------
 [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression) | The penalty, C, and what kind of solver to use were investigated.
-Various [ensemble methods](https://en.wikipedia.org/wiki/Ensemble_learning)([random forest](https://en.wikipedia.org/wiki/Random_forest), [extremely randomized](), [bagging](https://en.wikipedia.org/wiki/Bootstrap_aggregating), [adaboost](https://en.wikipedia.org/wiki/AdaBoost), and [gradient boost]()): | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
-[Passive aggressive]() algorithms | With regularization as the hyper-parameter (Explored but not used because cannot calculate predictive probabilities to be calculated).
-[Gaussian Naïve Bayes]() classifier | Only number of principal components.
-[Support Vector Machines]() | Type of kernel used, gamma, whether to use a shrinking heuristic, nu, and gamma kernel coefficients.
+[Various ensemble methods](https://en.wikipedia.org/wiki/Ensemble_learning)([random forest](https://en.wikipedia.org/wiki/Random_forest), [extremely randomized](http://link.springer.com/article/10.1007/s10994-006-6226-1), [bagging](https://en.wikipedia.org/wiki/Bootstrap_aggregating), [adaboost](https://en.wikipedia.org/wiki/AdaBoost), and [gradient boost](https://en.wikipedia.org/wiki/Gradient_boosting)) | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
+[Passive aggressive](http://jmlr.csail.mit.edu/papers/volume7/crammer06a/crammer06a.pdf) algorithms | With regularization as the hyper-parameter (Explored but not used because cannot calculate predictive probabilities to be calculated).
+[Gaussian Naïve Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier) classifier | Only number of principal components.
+[Support Vector Machines](https://en.wikipedia.org/wiki/Support_vector_machine) | Type of kernel used, gamma, whether to use a shrinking heuristic, nu, and gamma kernel coefficients.
 [K Nearest Neighbors](https://en.wikipedia.org/wiki/K-means_clustering) | Number of neighbors, distance metrics (with corresponding hyper parameters), and although used with all aforementioned models, PCA was of particular importance and was used to lower the number of features used to calculate the distance metrics (interestingly only about 5-10 were optimal choices).
 
 
@@ -71,7 +71,9 @@ The best models were selected using both the accuracy and ROC AUC of the hold ou
 Ultimately, I decided to just take the averages of the predicted probabilities of the best models, rather than stack an additional model, since this method gave excellent results on the holdout set, and I did not want to overfit on the training data set.
 
 ## Solution
-The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. The six best models with their parameters identified were:
+The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. 
+The six best models with their parameters identified were:
+
 
 Regressor | Tuning Parameters
 ------------ | -------------
