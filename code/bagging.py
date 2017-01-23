@@ -1,3 +1,5 @@
+import time
+# time.ctime()
 import pandas as pd
 import numpy as np
 print "Set Variables"
