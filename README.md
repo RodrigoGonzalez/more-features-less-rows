@@ -53,13 +53,12 @@ A selection of models used along with their parameters and hyper-parameters is g
 
 Classifier | Tuning Parameters
 ------------ | -------------
--	[Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression) | The penalty, C, and what kind of solver to use were investigated.
--	Various [ensemble methods]():
-([random forest](), [extremely randomized](), [bagging](), [adaboost](), and [gradient boost]()): | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
--	Passive aggressive algorithms | With regularization as the hyper-parameter (Explored but not used because cannot calculate predictive probabilities to be calculated).
--	Gaussian Naïve Bayes classifier | Only number of principal components.
--	Support Vector Machines | Type of kernel used, gamma, whether to use a shrinking heuristic, nu, and gamma kernel coefficients.
--	K Nearest Neighbors | Number of neighbors, distance metrics (with corresponding hyper parameters), and although used with all aforementioned models, PCA was of particular importance and was used to lower the number of features used to calculate the distance metrics (interestingly only about 5-10 were optimal choices).
+[Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression) | The penalty, C, and what kind of solver to use were investigated.
+Various [ensemble methods](https://en.wikipedia.org/wiki/Ensemble_learning)([random forest](https://en.wikipedia.org/wiki/Random_forest), [extremely randomized](), [bagging](https://en.wikipedia.org/wiki/Bootstrap_aggregating), [adaboost](https://en.wikipedia.org/wiki/AdaBoost), and [gradient boost]()): | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
+[Passive aggressive]() algorithms | With regularization as the hyper-parameter (Explored but not used because cannot calculate predictive probabilities to be calculated).
+[Gaussian Naïve Bayes]() classifier | Only number of principal components.
+[Support Vector Machines]() | Type of kernel used, gamma, whether to use a shrinking heuristic, nu, and gamma kernel coefficients.
+[K Nearest Neighbors](https://en.wikipedia.org/wiki/K-means_clustering) | Number of neighbors, distance metrics (with corresponding hyper parameters), and although used with all aforementioned models, PCA was of particular importance and was used to lower the number of features used to calculate the distance metrics (interestingly only about 5-10 were optimal choices).
 
 
 Given the number of models used and the number of hyper-parameters explored, a very specific process was developed in order to efficiently select the best models. A pipeline algorithm that incorporated all of the transformations was used for efficiency with a parameter grid that could easily be updated depending on the parameters and hyper parameters (whether or not to use PCA for example) the models employ using a grid search. 
