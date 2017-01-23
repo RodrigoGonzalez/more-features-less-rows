@@ -91,5 +91,5 @@ Although principal component analysis was used on the features that were identif
 The final models’ predicted probabilities were then averaged, to get a final predicted probabilities that resulted in an AUC of 0.97. Averaging works quite well for a wide range of problems.
 
 ## Acknowledgements
-scikit learn had excellent machine learning algorithms that were employed
-[Cawley, G.C.; Talbot, N.L.C. On over-fitting in model selection and subsequent selection bias in performance evaluation. J. Mach. Learn. Res 2010,11, 2079-2107.]()
+- scikit learn had excellent machine learning algorithms that were employed
+- [Cawley, G.C.; Talbot, N.L.C. On over-fitting in model selection and subsequent selection bias in performance evaluation. J. Mach. Learn. Res 2010,11, 2079-2107.]()
