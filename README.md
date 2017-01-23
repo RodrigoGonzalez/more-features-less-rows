@@ -61,20 +61,20 @@ The best models were selected using both the accuracy and ROC AUC of the hold ou
 Ultimately, I decided to just take the averages of the predicted probabilities of the best models, rather than stack an additional model, since this method gave excellent results on the holdout set, and I did not want to overfit on the training data set.
 
 ## Solution
-The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches.
+The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. The Logistic Regression was the only method that was optimized with 83 principal components, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported.
+
 
 
 ### The Best Models
 Regressor | Tuning Parameters
 ------------ | -------------
--	Bagging Classifier | Approximately 500 trees, and max features & max samples of around 0.85
--	Extremely Randomized Trees Classifier | Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a gini coefficient, with bootstrapping.
--	Logistic Regression | An L1 penalty was found to be the best, using a liblinear solver, with 95 principal components, and various C parameters depending on the scoring method.
--	Nu-Support Vector Classification | A nu of 0.001 worked very well, with a third polynomial kernel type, gammas in the thousandths, a coefficient term of 1, with shrinking.
--	Random Forest | Out-of-bag samples were used to estimate the generalization error, around 500 trees with a max depth of 6.
--	C-Support Vector Classification | Gammas in the thousands range, coefficients of 9.0, with third degree polynomial kernels and shrinking.
+Bagging Classifier | Approximately 500 trees, and max features & max samples of around 0.85
+Extremely Randomized Trees Classifier | Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a gini coefficient, with bootstrapping.
+Logistic Regression | An L1 penalty was found to be the best, using a liblinear solver, with 95 principal components, and various C parameters depending on the scoring method.
+Nu-Support Vector Classification | A nu of 0.001 worked very well, with a third polynomial kernel type, gammas in the thousandths, a coefficient term of 1, with shrinking.
+Random Forest | Out-of-bag samples were used to estimate the generalization error, around 500 trees with a max depth of 6.
+C-Support Vector Classification | Gammas in the thousands range, coefficients of 9.0, with third degree polynomial kernels and shrinking.
 
-The Logistic Regression was the only method that was optimized with 83 principal components, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported.
 
 ## Conclusion
 The objective of this challenge was to build a model based on a training set of 250 rows with 300 features, in order to predict probabilities for 19,750 rows. Feature selection was very important in order to train a robust model, and a logistic regression identified features of interest. If a description of the feature were would have been provided, this would have been an excellent way to identify data that is important to collect for predicting a target value.
