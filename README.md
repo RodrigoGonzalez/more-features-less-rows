@@ -18,7 +18,7 @@ The input data provided was transformed using the aforementioned feature selecti
 4.	[xgboost](https://github.com/dmlc/xgboost): Gradient boosting library.
 
 ## Model Exploration
-Numerous classification algorithms were explored to fit the training data as part of the model selection process. Given that the labels were generated from the features using an unknown process, many kinds of models were explored. Extreme gradient boosting was considered, however, given the rows in the training set being so small, there was concern that the method would overfit the data. 
+Numerous classification algorithms were explored to fit the training data as part of the model selection process. Given that the labels were generated from the features using an unknown process, many kinds of models were explored. Extreme gradient boosting was considered, however, given the rows in the training set being so small, there was concern that the method would overfit the data.
 
 A selection of models explored in the analysis along with their parameters and hyper-parameters is given below:
 
@@ -59,7 +59,7 @@ Scording Method | Description | Equation
 ------------ | -------------  | -------------
 [accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification) | Accuracy is the proportion of true results (both true positives and true negatives) among the total number of cases examined | Accuracy = (True Positive + True Negative) / (Condition Positives + Negatives)
 [f1](https://en.wikipedia.org/wiki/F1_score) | The F1 score can be interpreted as a weighted average of the precision and recall | f1 = 2 * (precision * recall) / (precision + recall)
-[log-loss]() | The negative log-likelihood of the true labels given a probabilistic classifier’s predictions | logloss=−1N∑i=1N∑j=1Myijlog(pij)
+[log-loss]() | The negative log-likelihood of the true labels given a probabilistic classifier’s predictions | -log P(yt|yp) = -(yt log(yp) + (1 - yt) log(1 - yp))
 [ROC AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) | The ROC is created by plotting the fraction of True Positives vs the fraction of False Positives | TP / (TP+FN) vs TP / (TP+FN)
 
 The ultimate strategy is to stack or blend a few different models in order to both decrease the variance and increases the predictive abilities of the final algorithm, which will decrease the likelihood of overfitting.
@@ -86,7 +86,7 @@ C-Support Vector Classification | Gammas in the thousands range, coefficients of
 ## Conclusion
 The objective of this challenge was to build a model based on a training set of 250 rows with 300 features, in order to predict probabilities for 19,750 rows. Feature selection was very important in order to train a robust model, and a logistic regression identified features of interest. If a description of the feature were would have been provided, this would have been an excellent way to identify data that is important to collect for predicting a target value.
 
-Although principal component analysis was used on the features that were identified, this feature extraction technique did not add much information to the final models. 
+Although principal component analysis was used on the features that were identified, this feature extraction technique did not add much information to the final models.
 
 The final models’ predicted probabilities were then averaged, to get a final predicted probabilities that resulted in an AUC of 0.97. Averaging works quite well for a wide range of problems.
 
