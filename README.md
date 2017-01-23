@@ -51,10 +51,11 @@ Numerous classification algorithms were explored to fit the training data as par
 
 A selection of models used along with their parameters and hyper-parameters is given below:
 
-### Classifier | Tuning Parameters
+Classifier | Tuning Parameters
 ------------ | -------------
--	Logistic Regression | The penalty, C, and what kind of solver to use were investigated.
--	Various ensemble methods (random forest, extremely randomized, bagging, adaboost, and gradient boost): | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
+-	[Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression) | The penalty, C, and what kind of solver to use were investigated.
+-	Various [ensemble methods]():
+([random forest](), [extremely randomized](), [bagging](), [adaboost](), and [gradient boost]()): | Number of trees/estimators, max depth, max features, learning rate, functions to measure quality of split, whether to use bootstrapping, whether to use out-of-bag samples to estimate the generalization error, whether to use stochastic gradient boosting, etc. depending on the ensemble method used.
 -	Passive aggressive algorithms | With regularization as the hyper-parameter (Explored but not used because cannot calculate predictive probabilities to be calculated).
 -	Gaussian Naïve Bayes classifier | Only number of principal components.
 -	Support Vector Machines | Type of kernel used, gamma, whether to use a shrinking heuristic, nu, and gamma kernel coefficients.
@@ -73,7 +74,7 @@ Ultimately, I decided to just take the averages of the predicted probabilities o
 ## Solution
 The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. The six best models with their parameters identified were:
 
-### Regressor | Tuning Parameters ###
+Regressor | Tuning Parameters
 ------------ | -------------
 -	Bagging Classifier | Approximately 500 trees, and max features & max samples of around 0.85
 -	Extremely Randomized Trees Classifier | Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a gini coefficient, with bootstrapping.
