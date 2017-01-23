@@ -61,7 +61,6 @@ Scording Method | Description | Equation
 [f1](https://en.wikipedia.org/wiki/F1_score) | The F1 score can be interpreted as a weighted average of the precision and recall | f1 = 2 * (precision * recall) / (precision + recall)
 [log-loss]() | The negative log-likelihood of the true labels given a probabilistic classifier’s predictions | logloss=−1N∑i=1N∑j=1Myijlog(pij)
 J(θ)=−1m[∑mi=1y(i)loghθ(x(i))]
-
 [ROC AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) | The ROC is created by plotting the fraction of True Positives vs the fraction of False Positives | TP / (TP+FN) vs TP / (TP+FN)
 
 The ultimate strategy is to stack or blend a few different models in order to both decrease the variance and increases the predictive abilities of the final algorithm, which will decrease the likelihood of overfitting.
