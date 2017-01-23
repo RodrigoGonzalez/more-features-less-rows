@@ -74,7 +74,7 @@ The best models were selected using both the accuracy and ROC AUC of the hold ou
 Ultimately, I decided to just take the averages of the predicted probabilities of the best models, rather than stack an additional model, since this method gave excellent results on the holdout set, and I did not want to overfit on the training data set.
 
 ## Solution
-The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. The Logistic Regression was the only method that was optimized with 83 principal components, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported.
+The final solution was calculated using the entire training data set to train the models using the optimized parameters found during the grid searches. The Logistic Regression was the only method that was optimized with 83 features, all the others were fit using 100 principal components. The predicted probabilities of all of these methods were then averaged to get the resulting predicted probabilities that are reported. In order to determine which features are most important, PCA should be avoided since the features and transformed to a new feature space.
 
 
 
