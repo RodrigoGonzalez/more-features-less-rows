@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 from collections import OrderedDict
 import string
-
 from scipy.stats import skew
 from scipy.stats.stats import pearsonr
 import cPickle as pickle
@@ -90,7 +89,7 @@ class data_transporter(object):
 
         coeffs = model.coef_.nonzero()[1]
         self.features = self.allfeatures[coeffs]
-
+        self. update_data()
 
 def grid_search(dt):
     '''
