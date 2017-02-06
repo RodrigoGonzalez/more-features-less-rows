@@ -99,3 +99,6 @@ The final models’ predicted probabilities were then averaged, to get a final p
 ## Acknowledgements
 - scikit learn had excellent machine learning algorithms that were employed
 - [Cawley, G.C.; Talbot, N.L.C. On over-fitting in model selection and subsequent selection bias in performance evaluation. J. Mach. Learn. Res 2010,11, 2079-2107.]()
+
+## Tags
+[binary-classification] [classification] [python] [random-forest] [supervised-learning][svc][crossvalidation]
