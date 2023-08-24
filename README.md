@@ -40,7 +40,7 @@ The algorithm for fitting the models incorporated nested cross-validation with s
 ```python
 best = []
 
-cv_outer = StratifiedShuffleSplit(y, n_iter=5, test_size=0.2, random_state=RANDOM_STATE)
+cv_outer = StratifiedShuffleSplit(y, test_size=0.2, random_state=RANDOM_STATE)
 
 for training_set_indices_i, testing_set_indices_i in cv_outer:
 
@@ -49,7 +49,7 @@ for training_set_indices_i, testing_set_indices_i in cv_outer:
 
     grid_search.fit(*training_set_i)
 
-    print grid_search.best_params_, '\t\t', grid_search.score(*testing_set_i)
+    print(grid_search.best_params_, '\t\t', grid_search.score(*testing_set_i))
 
     params = np.array(grid_search.best_params_.items())
 

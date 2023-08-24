@@ -1,0 +1,56 @@
+[tool.poetry]
+name = "more-features-less-rows"
+version = "1.0.0"
+description = "sample project for dataset with many features and few observations"
+authors = ["Rodrigo Gonzalez <r@rodrigo-gonzalez.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.8.17"
+xgboost = "^1.7.6"
+pandas = "^2.0.3"
+numpy = "^1.17.3"
+scikit-learn = "^1.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.12"
+isort = "^5.12.0"
+black = "^23.7.0"
+autoflake = "^2.2.0"
+pylama = "^8.4.1"
+flake8 = "^6.1.0"
+pyupgrade = "^3.10.1"
+
+[tool.isort]
+profile = "black"
+skip_glob = ["docs", "example_repos"]
+line_length = 100
+multi_line_output = 4
+force_single_line = true
+src_paths = ["src", "tests", "scripts"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+known_first_party = ["flake8_custom_import_rules", "my_base_module"]
+known_third_party = ["flake8"]
+
+[tool.black]
+line-length = 100
+target-version = ["py39", "py310", "py311"]
+include = '\.pyi?$'
+exclude = '''
+    /(
+        \.git
+      | \.pytest_cache
+      | \.mypy_cache
+      | \.venv
+      | _build
+      | build
+      | dist
+      | docs
+    )/
+'''
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
