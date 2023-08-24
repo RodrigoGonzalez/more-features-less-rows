@@ -1,4 +1,4 @@
-# Features >>> Observations
+# Features \>\>\> Observations
 
 In many disciplines such as business and genomics, analysis often requires making inferences based on limited amounts of data where there are more variables than observations (e.g. [genetic research](https://deepblue.lib.umich.edu/bitstream/handle/2027.42/46947/10994_2005_Article_422926.pdf?sequence=1&isAllowed=y), [image processing](https://en.wikipedia.org/wiki/Image_processing), [text analysis](https://en.wikipedia.org/wiki/Information_retrieval), [recommender systems](http://s3.amazonaws.com/academia.edu.documents/32978074/Recommender_systems_handbook.pdf?AWSAccessKeyId=AKIAIWOWYYGZ2Y53UL3A&Expires=1485158590&Signature=6C7gZaKoaEjmh2Ag0fJRQcv2X5o%3D&response-content-disposition=inline%3B%20filename%3DEditors.pdf): i.e. amazon buyers, netflix viewers).
 
