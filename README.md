@@ -79,14 +79,31 @@ The final solution was calculated using the entire training data set to train th
 
 
 ### The Best Models
-| Regressor                             | Tuning Parameters                                                                                                                                         |
-|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Bagging Classifier                    | Approximately 500 trees, and max features & max samples of around 0.85                                                                                    |
-| Extremely Randomized Trees Classifier | Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a gini coefficient, with bootstrapping.                       |
-| Logistic Regression                   | An L1 penalty was found to be the best, using a liblinear solver, with 95 principal components, and various C parameters depending on the scoring method. |
-| Nu-Support Vector Classification      | A nu of 0.001 worked very well, with a third polynomial kernel type, gammas in the thousandths, a coefficient term of 1, with shrinking.                  |
-| Random Forest                         | Out-of-bag samples were used to estimate the generalization error, around 500 trees with a max depth of 6.                                                |
-| C-Support Vector Classification       | Gammas in the thousands range, coefficients of 9.0, with third degree polynomial kernels and shrinking.                                                   |
+
+#### Bagging Classifier
+
+- **Tuning Parameters**: Approximately 500 trees, and max features & max samples of around 0.85
+
+#### Extremely Randomized Trees Classifier
+
+- **Tuning Parameters**: Between 475-525 trees, at a max depth of 7, max features calculated using natural log using a Gini coefficient, with bootstrapping.
+
+#### Logistic Regression
+
+- **Tuning Parameters**: An L1 penalty was found to be the best, using a liblinear solver, with 95 principal components, and various C parameters depending on the scoring method.
+
+#### Nu-Support Vector Classification
+
+- **Tuning Parameters**: A nu of 0.001 worked very well, with a third polynomial kernel type, gammas in the thousandths, a coefficient term of 1, with shrinking.
+
+#### Random Forest
+
+- **Tuning Parameters**: Out-of-bag samples were used to estimate the generalization error, around 500 trees with a max depth of 6.
+
+#### C-Support Vector Classification
+
+- **Tuning Parameters**: Gammas in the thousands range, coefficients of 9.0, with third-degree polynomial kernels and shrinking.
+
 
 ## Conclusion
 The objective of this challenge was to build a model based on a training set of 250 rows with 300 features, in order to predict probabilities for 19,750 rows. Feature selection was very important in order to train a robust model, and a logistic regression identified features of interest. If a description of the feature were would have been provided, this would have been an excellent way to identify data that is important to collect for predicting a target value.
@@ -99,5 +116,5 @@ The final models’ predicted probabilities were then averaged, to get a final p
 - scikit learn had excellent machine learning algorithms that were employed
 - [Cawley, G.C.; Talbot, N.L.C. On over-fitting in model selection and subsequent selection bias in performance evaluation. J. Mach. Learn. Res 2010,11, 2079-2107.]()
 
-## Tags
+## Keywords
 [binary-classification] [classification] [python] [random-forest] [supervised-learning][svc][crossvalidation]
