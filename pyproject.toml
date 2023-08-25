@@ -22,6 +22,8 @@ autoflake = "^2.2.0"
 pylama = "^8.4.1"
 flake8 = "^6.1.0"
 pyupgrade = "^3.10.1"
+matplotlib = "^3.7.2"
+seaborn = "^0.12.2"
 
 [tool.isort]
 profile = "black"

@@ -1,5 +1,5 @@
+import pickle
 
-import cPickle as pickle
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -10,8 +10,8 @@ from sklearn.preprocessing import StandardScaler
 
 class data_transporter(object):
     """
-    This class makes it easier to move all of the data, including the raw data,
-    into the various python machine learning algorithms without haveing to load
+    This class makes it easier to move all the data, including the raw data,
+    into the various python machine learning algorithms without having to load
     them (etc.) all over again.
     """
 
@@ -35,13 +35,11 @@ class data_transporter(object):
 
         df_train_id = df["id"][:249]
         df_test_id = df["id"][250:]
-        y = df["target_eval"][:250].get_values()
-        X = df_train.get_values()
-        X_pred = df_test.get_values()  # data to predict on
+        y = df["target_eval"][:250].values
+        X = df_train.values
+        X_pred = df_test.values  # data to predict on
 
-        package = [df, df_train, df_test, df_train_id, df_test_id, y, X, X_pred]
-
-        return package
+        return [df, df_train, df_test, df_train_id, df_test_id, y, X, X_pred]
 
     def unpack(self, package):
         """
@@ -159,7 +157,7 @@ def find_features(grid_search):
 
 
 if __name__ == "__main__":
-    data_location = "../data/anonymised_data.csv"
+    data_location = "data/anonymized_data.csv"
     dt = data_transporter(data_location)
 
     # Run grid search

@@ -1,7 +1,4 @@
-
 import numpy as np
-
-# time.ctime()
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.metrics import accuracy_score
@@ -15,15 +12,18 @@ from sklearn.preprocessing import StandardScaler
 print("Set Variables")
 CV = 5
 RANDOM_STATE = 0
-SCORING = "roc_auc"
+SCORING = "f1"
 version = "final_"
-model_type = f"bagging_{RANDOM_STATE}_{SCORING}"
+model_type = f"nuscv_{RANDOM_STATE}_{SCORING}"
 
 print("\nSet hyperparameters")
-n_components = [95, 100]
-n_estimators = [475, 500, 525, 550, 575, 600, 625]
-max_samples = [0.80, 0.85]
-max_features = [0.80]
+print(SCORING)
+n_components = [100]
+nu = [0.01]
+kernel = ["poly"]
+gamma = np.logspace(-5, -4, 100)
+coef0 = [1.0]
+shrinking = [True]
 
 
 print("\nProcess Data & Fit Model")
@@ -41,7 +41,7 @@ X, X_test, y, y_test = train_test_split(
 
 ###############################################################
 print("Load model")
-from sklearn.ensemble import BaggingClassifier
+from sklearn.svm import NuSVC
 
 ###############################################################
 print("\nGrid Search")
@@ -50,15 +50,7 @@ pipe = Pipeline(
     [
         ("scl", StandardScaler()),
         ("pca", PCA()),
-        (
-            "clf",
-            BaggingClassifier(
-                bootstrap=True,
-                bootstrap_features=True,
-                oob_score=True,
-                random_state=RANDOM_STATE + 1,
-            ),
-        ),
+        ("clf", NuSVC(degree=3, probability=True, random_state=RANDOM_STATE)),
     ]
 )
 
@@ -66,41 +58,37 @@ pipe = Pipeline(
 param_grid = [
     {
         "pca__n_components": n_components,
-        "clf__n_estimators": n_estimators,
-        "clf__max_samples": max_samples,
-        "clf__max_features": max_features,
+        "clf__kernel": kernel,
+        "clf__nu": nu,
+        "clf__gamma": gamma,
+        "clf__coef0": coef0,
+        "clf__shrinking": shrinking,
     }
 ]
 
 grid_search = GridSearchCV(
     estimator=pipe, param_grid=param_grid, scoring=SCORING, cv=CV, verbose=1, n_jobs=-1
 )
-
 ###############################################################
-print("\nStart nested loops")
+print("Start nested loops")
 
 best = []
 
-cv_outer = StratifiedShuffleSplit(y, test_size=0.2, random_state=RANDOM_STATE)
+cv_outer = StratifiedShuffleSplit(y, n_iter=3, test_size=0.2, random_state=RANDOM_STATE)
 
 for training_set_indices_i, testing_set_indices_i in cv_outer:
     training_set_i = X[training_set_indices_i], y[training_set_indices_i]
     testing_set_i = X[testing_set_indices_i], y[testing_set_indices_i]
-
     grid_search.fit(*training_set_i)
-
     print(grid_search.best_params_, "\t\t", grid_search.score(*testing_set_i))
-
     params = np.array(grid_search.best_params_.items())
-
     score = ["score", grid_search.score(*testing_set_i)]
-
     best.append(np.vstack((params, score)))
+
 
 for i, model in enumerate(best):
     print(f"Model {i}")
     print(str(model))
-
 
 ###############################################################
 print("\nFinal Model")
@@ -168,7 +156,7 @@ y_prob_train = gs.predict_proba(X_test)
 y_pred_train = gs.predict(X_test)
 acc, roc_auc = accuracy_score(y_test, y_pred_train), roc_auc_score(y_test, y_pred_train)
 print(f"\nAccuracy Score: {acc}")
-print(f"ROC_AUC: {roc_auc}") + str(roc_auc)
+print(f"\nAccuracy Score: {roc_auc}")
 probabilities_train_df = pd.DataFrame(y_prob_train)
 predictions_train_df = pd.DataFrame(y_pred_train, columns=["predictions"])
 df_train = pd.concat([probabilities_train_df, predictions_train_df], axis=1)
@@ -179,7 +167,7 @@ df_train.to_csv(
     index=False,
 )
 
-# mean_absolute_error 0 {'clf__max_features': 0.9, 'pca__n_components': 100, 'clf__n_estimators': 500, 'clf__max_samples': 0.85}
-# f1 0 {'clf__max_features': 0.85, 'pca__n_components': 100, 'clf__n_estimators': 525, 'clf__max_samples': 0.85}
-# log_loss 0 {'clf__max_features': 0.85, 'pca__n_components': 100, 'clf__n_estimators': 500, 'clf__max_samples': 0.9}
-# roc_auc 0 {'clf__max_features': 0.8, 'pca__n_components': 100, 'clf__n_estimators': 500, 'clf__max_samples': 0.8}
+# 'mean_absolute_error' 0 {'clf__gamma': 0.00035938136638046257, 'clf__coef0': 5.0, 'clf__shrinking': True, 'clf__nu': 0.001, 'pca__n_components': 100, 'clf__kernel': 'poly'}
+# f1 0 {'clf__gamma': 0.0031622776601683794, 'clf__coef0': 1.0, 'clf__shrinking': True, 'clf__nu': 0.001, 'pca__n_components': 100, 'clf__kernel': 'poly'}
+# roc_auc 0 {'clf__gamma': 0.0023713737056616554, 'clf__coef0': 1.0, 'clf__shrinking': True, 'clf__nu': 0.001, 'pca__n_components': 100, 'clf__kernel': 'poly'}
+# log_loss 0 {'clf__gamma': 0.0031622776601683794, 'clf__coef0': 1.0, 'clf__shrinking': True, 'clf__nu': 0.001, 'pca__n_components': 100, 'clf__kernel': 'poly'}
