@@ -14,7 +14,7 @@ CV = 5
 RANDOM_STATE = 0
 SCORING = "log_loss"
 version = "final_"
-model_type = "logit_normal" + str(RANDOM_STATE) + "_" + SCORING
+model_type = f"logit_normal{RANDOM_STATE}_{SCORING}"
 
 print("\nSet hyperparameters")
 n_components = [95]
@@ -113,7 +113,7 @@ predictions_df = pd.DataFrame(y_pred, columns=["predictions"])
 print("\nTraining data")
 scl_pca_df = pd.concat([probabilities_df, predictions_df], axis=1)
 scl_pca_df.to_csv(
-    "../1st_gen_predictions_train/train" + version + model_type + ".csv",
+    f"../1st_gen_predictions_train/train{version}" + model_type + ".csv",
     mode="w",
     head=True,
     index=False,
@@ -133,7 +133,9 @@ probabilities_train_df = pd.DataFrame(y_prob_train)
 predictions_train_df = pd.DataFrame(y_pred_train, columns=["predictions"])
 df_train = pd.concat([probabilities_train_df, predictions_train_df], axis=1)
 df_train.to_csv(
-    "../1st_gen_predictions_submission/submission" + version + model_type + ".csv",
+    f"../1st_gen_predictions_submission/submission{version}"
+    + model_type
+    + ".csv",
     mode="w",
     head=True,
     index=False,
@@ -149,7 +151,7 @@ probabilities_train_df = pd.DataFrame(y_prob_train)
 predictions_train_df = pd.DataFrame(y_pred_train, columns=["predictions"])
 df_train = pd.concat([probabilities_train_df, predictions_train_df], axis=1)
 df_train.to_csv(
-    "../1st_gen_predictions_test/test" + version + model_type + ".csv",
+    f"../1st_gen_predictions_test/test{version}" + model_type + ".csv",
     mode="w",
     head=True,
     index=False,

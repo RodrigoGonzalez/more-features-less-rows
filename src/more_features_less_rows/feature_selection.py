@@ -129,8 +129,8 @@ def grid_search(dt):
 
     gs.fit(dt.X, dt.y)
 
-    print("\nBest Score: {}".format(gs.best_score_))
-    print("\n\nBest Parameter (C): {}".format(gs.best_params_))
+    print(f"\nBest Score: {gs.best_score_}")
+    print(f"\n\nBest Parameter (C): {gs.best_params_}")
 
     return gs
 
@@ -171,6 +171,5 @@ if __name__ == "__main__":
 
     # Save
     file_Name = "data_transporter.pkl"
-    fileObject = open(file_Name, "wb")
-    pickle.dump(dt, fileObject)
-    fileObject.close()
+    with open(file_Name, "wb") as fileObject:
+        pickle.dump(dt, fileObject)

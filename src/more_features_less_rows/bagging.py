@@ -96,7 +96,7 @@ for training_set_indices_i, testing_set_indices_i in cv_outer:
 
 for i, model in enumerate(best):
     print(f"Model {i}")
-    print(str(model))
+    print(model)
 
 
 ###############################################################
@@ -134,7 +134,7 @@ predictions_df = pd.DataFrame(y_pred, columns=["predictions"])
 print("\nTraining data")
 scl_pca_df = pd.concat([probabilities_df, predictions_df], axis=1)
 scl_pca_df.to_csv(
-    "../1st_gen_predictions_train/train" + version + model_type + ".csv",
+    f"../1st_gen_predictions_train/train{version}" + model_type + ".csv",
     mode="w",
     head=True,
     index=False,
@@ -154,7 +154,9 @@ probabilities_train_df = pd.DataFrame(y_prob_train)
 predictions_train_df = pd.DataFrame(y_pred_train, columns=["predictions"])
 df_train = pd.concat([probabilities_train_df, predictions_train_df], axis=1)
 df_train.to_csv(
-    "../1st_gen_predictions_submission/submission" + version + model_type + ".csv",
+    f"../1st_gen_predictions_submission/submission{version}"
+    + model_type
+    + ".csv",
     mode="w",
     head=True,
     index=False,
@@ -170,7 +172,7 @@ probabilities_train_df = pd.DataFrame(y_prob_train)
 predictions_train_df = pd.DataFrame(y_pred_train, columns=["predictions"])
 df_train = pd.concat([probabilities_train_df, predictions_train_df], axis=1)
 df_train.to_csv(
-    "../1st_gen_predictions_test/test" + version + model_type + ".csv",
+    f"../1st_gen_predictions_test/test{version}" + model_type + ".csv",
     mode="w",
     head=True,
     index=False,
